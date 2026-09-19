@@ -11,6 +11,8 @@ for reviewing translation work in the `git-docs-ja` project, then rewritten
 as a standalone `git` + `bash` subcommand with no Emacs dependency, and
 later split out into this repository so it can be used on its own.
 
+![Screenshot: three-pane view comparing HEAD, working copy, and a word-level diff, showing an English-to-Japanese translation in progress](docs/screenshot.png)
+
 ## Features
 
 - Three-pane view: revision (A) / working copy (B) / word-level diff
