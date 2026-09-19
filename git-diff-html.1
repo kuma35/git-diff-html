@@ -1,0 +1,49 @@
+.TH GIT-DIFF-HTML 1 "2026-09-20" "git-diff-html" "Git Manual"
+.SH NAME
+git-diff-html \- render a revision's html file and the working copy side by side, with a word-level diff
+.SH SYNOPSIS
+.B git diff-html
+[<revision>] [\-\-] <path>
+.br
+.B git diff-html
+\-\-cleanup | \-C
+.SH DESCRIPTION
+Renders
+.I revision
+'s version of
+.I path
+(default revision: HEAD) and the working copy's version side by side in a
+web browser, plus a third pane showing a word-level diff (insertions in
+green, deletions in red). Display only; nothing can be edited from the
+generated page.
+.PP
+.I path
+is resolved like any git pathspec: relative to the current directory, not
+necessarily the repository's toplevel.
+.SH OPTIONS
+.TP
+.B \-\-cleanup, \-C
+Remove every temporary file this command has generated
+(\fB$TMPDIR\fR/git\-diff\-html\-*.html, or \fB/tmp\fR if
+.B $TMPDIR
+is unset) instead of comparing anything. Prints nothing when there was
+nothing to remove.
+.TP
+.B \-h, \-\-help
+Show a short usage summary. (Note: when invoked as
+.B git diff-html --help ,
+git itself intercepts \fB\-\-help\fR and shows this manual page instead of
+running the command; run \fBgit-diff-html -h\fR directly to see the short
+usage form.)
+.SH EXAMPLES
+.TP
+git diff-html \-\- Documentation-ja/git.info
+Compare HEAD's version of the file against the working copy.
+.TP
+git diff-html HEAD~3 \-\- Documentation-ja/git.info
+Compare the version from 3 commits ago against the working copy.
+.TP
+git diff-html \-\-cleanup
+Remove leftover generated temporary files.
+.SH SEE ALSO
+.BR git (1)

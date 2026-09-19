@@ -1,0 +1,49 @@
+.TH GIT-DIFF-HTML 1 "2026-09-20" "git-diff-html" "Git マニュアル"
+.\" 日本語(CJK)テキストには空白による改行位置が無く、troff の行揃え
+.\" (adjust)処理が "cannot adjust line" 警告を出すため、無効化する。
+.na
+.SH 名前
+git-diff-html \- 指定したリビジョン時点の html ファイルと作業コピーを、語句単位の diff 付きで並べて表示する
+.SH 書式
+.B git diff-html
+[<revision>] [\-\-] <path>
+.br
+.B git diff-html
+\-\-cleanup | \-C
+.SH 説明
+.I revision
+時点(省略時は HEAD)の
+.I path
+の内容と、作業コピー(ワーキングツリー)の内容を、Web ブラウザ上で
+並べてレンダリング表示する。さらに3つ目のペインとして、語句単位の
+diff(挿入は緑、削除は赤でハイライト)も表示する。表示専用であり、
+生成されたページから編集を行うことはできない。
+.PP
+.I path
+は通常の git の pathspec と同様、リポジトリのトップレベルではなく
+現在のディレクトリからの相対パスとして解釈される。
+.SH オプション
+.TP
+.B \-\-cleanup, \-C
+比較を行わず、このコマンドが生成した一時ファイルをすべて削除する。
+対象は \fB$TMPDIR\fR/git\-diff\-html\-*.html
+(\fB$TMPDIR\fR が未設定なら \fB/tmp\fR 以下)。
+削除対象が無い場合は何も出力しない。
+.TP
+.B \-h, \-\-help
+簡単な使い方(usage)を表示する。(注意: \fBgit diff-html --help\fR
+として実行した場合、\fB--help\fR は git 自身が横取りしてこの man
+ページを表示する。usage 形式をそのまま見たい場合は
+\fBgit-diff-html -h\fR のように直接実行すること。)
+.SH 使用例
+.TP
+git diff-html \-\- Documentation-ja/git.info
+HEAD 時点のファイルと作業コピーを比較する。
+.TP
+git diff-html HEAD~3 \-\- Documentation-ja/git.info
+3コミット前の時点のファイルと作業コピーを比較する。
+.TP
+git diff-html \-\-cleanup
+残っている生成済み一時ファイルを削除する。
+.SH 関連項目
+.BR git (1)
